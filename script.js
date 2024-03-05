@@ -1,3 +1,21 @@
+/*  
+*Two important  things in this program so far.
+
+1- location array: in this array I learend taht an array can have (objects{}) and these objects can have (keys and valuses) and (arrys).
+
+2-the second important thing is : the (update function()) the pur  purpose of having is to implement some actions from the location array on other function in the program, meaning instead  of 
+having a code body instead each function in the program, we created one function (update()) and we called it in other functions.
+
+
+
+
+*/
+
+
+
+
+
+
 // lets declare some variables
 // note: there is two ways to declare a variable in javascript (let) and (var). for now use let. dont ask why for now,lol.
 let camperbot;
@@ -16,13 +34,42 @@ let monsterHealth;
 
  // create an empty function
 
- function update(location) {
+ function update(location) {    // the location variable is an array peremeter
+      // output to the console/screen
+      
+      button1.innerText = location["button text"][0];// the innerText function is used to add text, and here we used a button that we already have and we add a text for it.
+      button2.innerText = location["button text"][1];
+      button3.innerText = location["button text"][2];
+      button1.onclick = location["button functions"][0];
+      button2.onclick = location["button functions"][1];
+      button3.onclick = location["button functions"][2];
+    text.innerText = location.text;
 
  }
 
 
 // Declare an array 
 let inventory = ["stick"];
+
+const weapons = [
+    {
+        name : "stick",
+        power : 5
+  
+    },
+    {
+      name : "dagger",
+      power : 30
+    },
+      {
+        name: "claw hammer",
+        power : 50
+      },
+      {
+        name : "sword",
+        power : 100
+      }
+];
 
 const locations = [
     // create the first object 
@@ -40,7 +87,13 @@ const locations = [
         "button functions": [buyHealth, buyWeapon, goTown],
         text: "You enter the store."
         
-      }
+      },
+      { 
+        name: "cave",
+        "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+        "button functions": [fightSlime, fightBeast, goTown],
+        text : "You enter the cave. You see some monsters." 
+      },
 
 ];      // create an array that stors objects. An object is declared between two carly bracket   {}
 
@@ -63,29 +116,36 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
 // step 36 , declare some functions
 
-function goTown() {
+function goTown() {    // the goTown and goStore should be empty
+
+    update(locations[0]);  // pass the first object ofthe array
+
     //console.log("Going to store.");  // output to the console/screen
-    button1.innerText = "Go to store";  // the innerText function is used to add text, and here we used a button that we already have and we add a text for it.
-        button2.innerText = "Go to cave";
-        button3.innerText = "Fight dragon";
-        button1.onclick = goStore;
-        button2.onclick = goCave;
-        button3.onclick = fightDragon;
-        text.innerText = "You are in the town square. You see a sign that says \"Store\".";
+    // button1.innerText = "Go to store";  // the innerText function is used to add text, and here we used a button that we already have and we add a text for it.
+    //     button2.innerText = "Go to cave";
+    //     button3.innerText = "Fight dragon";
+    //     button1.onclick = goStore;
+    //     button2.onclick = goCave;
+    //     button3.onclick = fightDragon;
+    //     text.innerText = "You are in the town square. You see a sign that says \"Store\".";
      
 }
 
 
 function goStore() {
     
-    console.log("Going to store.");  // output to the console/screen
-    button1.innerText = "Buy 10 health (10 gold)";  // the innerText function is used to add text, and here we used a button that we already have and we add a text for it.
-    button2.innerText = "Buy weapon (30 gold)";
-    button3.innerText = "Go to town square";
-    button1.onclick = buyHealth;   /* the onclick is there to do an action if the user click the button   */
-    button2.onclick = buyWeapon;
-    button3.onclick = goTown;
-    text.innerText = "You enter the store.";
+
+    update(locations[1]);       // step 68
+
+
+    // console.log("Going to store.");  // output to the console/screen
+    // button1.innerText = "Buy 10 health (10 gold)";  // the innerText function is used to add text, and here we used a button that we already have and we add a text for it.
+    // button2.innerText = "Buy weapon (30 gold)";
+    // button3.innerText = "Go to town square";
+    // button1.onclick = buyHealth;   /* the onclick is there to do an action if the user click the button   */
+    // button2.onclick = buyWeapon;
+    // button3.onclick = goTown;
+    // text.innerText = "You enter the store.";
   
 
 }
@@ -93,18 +153,37 @@ function goStore() {
 // three empty functions
 
 function buyHealth() {
-
+    
+    if (gold >= 10) {
+        gold -= 10;
+        health += 10;
+        goldText.innerText = gold;
+        healthText.innerText = health;
+      } else {
+        text.innerText = "You do not have enough gold to buy health."
+    
+      }
 }
 
 function buyWeapon() {
 
 }
 
+// step 69 
+
+function fightSlime() {
+
+} 
+
+function fightBeast(){
+    
+}
+
 
 
 // step 38 
 function goCave() {
-    console.log("Going to cave.");
+    update(locations[2]);
 }
 
 // step 39
