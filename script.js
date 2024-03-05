@@ -57,6 +57,7 @@ const weapons = [
         power : 5
   
     },
+
     {
       name : "dagger",
       power : 30
